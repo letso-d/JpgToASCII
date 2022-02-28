@@ -1,0 +1,108 @@
+﻿<Window x:Class="JpgToASCII_WPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:JpgToASCII_WPF"
+        mc:Ignorable="d" FontSize="18" FontFamily="Times New Roman"
+        x:Name = "mainWindow"
+        Title="Image Converter" 
+        Height="768" Width="1024" 
+        SizeChanged="mainWindow_SizeChanged"
+        MinWidth="800" MinHeight="600"
+        >
+    <Window.Background>
+        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+            <GradientStop Color="#FF1D0303" Offset="0"/>
+            <GradientStop Color="White" Offset="1"/>
+        </LinearGradientBrush>
+    </Window.Background>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="15"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="15"/>
+        </Grid.RowDefinitions>
+
+        <DockPanel Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left" >
+            <Menu BorderBrush="Black" BorderThickness="2" Grid.ColumnSpan="2" Margin="0,0,5,10" >
+                <MenuItem Header="_Control" FontSize="28" FontWeight="Bold" FontFamily="Times New Roman" >
+                    <MenuItem.Effect>
+                        <DropShadowEffect ShadowDepth="4" Opacity="0.5"/>
+                    </MenuItem.Effect>
+                    <MenuItem Header="_Open" FontSize="20" FontWeight="SemiBold" Click="MenuItem_Open_Click"/>
+                    <Separator />
+                    <MenuItem Header="_Exit" FontSize="20" FontWeight="SemiBold" Click="MenuItem_Click"/>
+                </MenuItem>
+            </Menu>
+            <Menu BorderBrush="Black" BorderThickness="2" Grid.ColumnSpan="2" Margin="0,0,5,10">
+                <MenuItem Header="_Convert" FontSize="28" FontWeight="Bold" FontFamily="Times New Roman" ToolTip="Converts and saves image">
+                    <MenuItem.Effect>
+                        <DropShadowEffect ShadowDepth="4" Opacity="0.5"/>
+                    </MenuItem.Effect>
+                    <MenuItem Header="_To ASCII" FontSize="20" FontWeight="SemiBold" Click="MenuItem_ASCII_Save_Click"/>
+                    <Separator />
+                    <MenuItem Header="_To Grayscale" FontSize="20" FontWeight="SemiBold" Click="MenuItem_grayscaleConvert_Click"/>
+                </MenuItem>
+            </Menu>
+            <Menu BorderBrush="Black" BorderThickness="2" Grid.ColumnSpan="2" Margin="0,0,5,10">
+                <MenuItem Header="_From ASCII" FontSize="28" FontWeight="Bold" FontFamily="Times New Roman" ToolTip="Converts and saves image">
+                    <MenuItem.Effect>
+                        <DropShadowEffect ShadowDepth="4" Opacity="0.5"/>
+                    </MenuItem.Effect>
+                    <MenuItem Header="_To grayscale" FontSize="20" FontWeight="SemiBold" Click="MenuItem_FromASCII_To_Grayscale_Click" />
+                </MenuItem>
+            </Menu>
+        </DockPanel>
+        <Image Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="2" VerticalAlignment="Center"
+            Margin="20,0"
+            Name = "mainImage"/>
+        <StackPanel Grid.Row="2" Grid.Column="3"
+                    Name="ImagePanel" Drop="ImagePanel_Drop"  AllowDrop="true" 
+                    Background="#FFD1CBCB" Opacity="0.5"
+                    MinHeight="300"
+                    >
+            <Border BorderThickness="4,4,4,4">
+                <Border.BorderBrush>
+                    <DrawingBrush Viewport="0,0,20,20" ViewportUnits="Absolute" TileMode="Tile">
+                        <DrawingBrush.Drawing>
+                            <DrawingGroup>
+                                <GeometryDrawing Brush="Black">
+                                    <GeometryDrawing.Geometry>
+                                        <GeometryGroup>
+                                            <RectangleGeometry Rect="0,0,50,50" />
+                                            <RectangleGeometry Rect="50,50,50,50" />
+                                        </GeometryGroup>
+                                    </GeometryDrawing.Geometry>
+                                </GeometryDrawing>
+                            </DrawingGroup>
+                        </DrawingBrush.Drawing>
+                    </DrawingBrush>
+                </Border.BorderBrush>
+                <TextBlock Text="Drag and drop image here" 
+                       MinHeight="300"
+                       VerticalAlignment="Bottom" HorizontalAlignment="Center"
+                       FontWeight="Bold" FontSize="26" Foreground="White"/>
+            </Border>
+        </StackPanel>
+        <Button
+            Margin="35,20"
+            Grid.Row="3" Grid.Column="3" Grid.ColumnSpan="2" Name="ConvertButton" 
+            FontWeight="Bold" FontSize="30" Foreground="White"
+            MaxHeight="50" MinHeight="20"
+            VerticalAlignment="Bottom" HorizontalAlignment="Center"
+            Background="Black" Click="ConvertButton_Click">
+            <TextBlock Text="Convert image to grayscale"/>
+        </Button>
+        
+    </Grid>
+</Window>
