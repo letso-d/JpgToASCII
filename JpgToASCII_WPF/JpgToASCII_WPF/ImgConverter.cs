@@ -24,14 +24,14 @@ namespace JpgToASCII_WPF
         public ImgConverter(string path, Bitmap bmp)
         {
             this.path = path;
-            this.img = GetResizedImage(bmp, 400);
+            this.img = GetResizedImage(bmp, 800);
         }
 
         public ImgConverter(string path)
         {
             this.path = path;
             this.img = new Bitmap(path);
-            this.img = GetResizedImage(this.img, 400);
+            this.img = GetResizedImage(this.img, 800);
         }
 
         bool defaultPath = true;
@@ -103,6 +103,10 @@ namespace JpgToASCII_WPF
                 var values = path.Split('.');
                 string prefix = values[0];
                 string postfix = values[1];
+                if (postfix == "txt")
+                {
+                    postfix = "png";
+                }
                 this.path = prefix + "_grayscale." + postfix;
             }
             try
